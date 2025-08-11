@@ -13,5 +13,18 @@ export const viewUser = async (req, res) => {
         res.status(500).json({message: error.message})
     }
 }
+
+export const viewUsers = async (req,res) => {
+    const {isAdmin} = req.user
+    if(!isAdmin){
+        return res.status(400).json({message: 'You are not authorized to carry out this action'})
+    }
+    try{
+        const users = await User.find()
+        res.status(200).json(users)
+    }catch(error){
+        res.status(500).json({message: error.message})
+    }
+}
    
 

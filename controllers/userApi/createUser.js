@@ -1,8 +1,6 @@
-import { match } from "assert";
 import User from "../../schema/userSchema.js";
 import bcrypt from 'bcryptjs'
 import dotenv from 'dotenv'
-import Mail from "nodemailer/lib/mailer/index.js";
 import { sendMail } from "../../utils/sendMail.js";
 
 dotenv.config()
