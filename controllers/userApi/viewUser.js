@@ -1,9 +1,9 @@
 import User from "../../schema/userSchema.js";
 
-export const viewUser = async(req, res){
+export const viewUser = async (req, res) => {
     const {id} = req.params
-    const {private} = req.user.isPrivate
-    if(private){
+    const {isPrivate} = req.user
+    if(isPrivate){
         return res.status({message: "This user limits who can view their posts."})
     }
     try{
@@ -13,3 +13,5 @@ export const viewUser = async(req, res){
         res.status(500).json({message: error.message})
     }
 }
+   
+
