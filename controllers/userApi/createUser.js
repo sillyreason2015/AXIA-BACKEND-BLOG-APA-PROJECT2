@@ -6,13 +6,13 @@ import { sendMail } from "../../utils/sendMail.js";
 dotenv.config()
 
 export const registerUser = async(req, res)=>{
-    const {username, name, password, email } = req.body
+    const {username, displayName, password, email } = req.body
 
-    if(!username || !name || !password || !email){
+    if(!username || !displayName || !password || !email){
         return res.status(400).json({message: "Please enter all fields"})
     }
     try{
-        const user = await User.findOne({email})
+        const user = await User.findOne({email}, {username})
         if(user){
            return res.status(400).json({message: "This User already exists"})
         }

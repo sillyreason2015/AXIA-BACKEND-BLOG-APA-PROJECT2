@@ -1,5 +1,5 @@
 import User from '../../schema/userSchema.js'
-import bcrypt from 'bcrypt'
+import bcrypt from 'bcryptjs'
 import genToken from '../../jwt/genToken.js'
 import { sendMail } from '../../utils/sendMail.js'
 
