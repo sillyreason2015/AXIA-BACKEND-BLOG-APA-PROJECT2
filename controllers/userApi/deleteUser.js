@@ -8,7 +8,7 @@ export const deleteUser = async (req, res) => {
         if(!user){
             return res.status(400).json({message: "This user does not exist"})
         }
-        if(id.toString() !== _id.toString() || !isAdmin){
+        if(id.toString() !== _id.toString() && !isAdmin){
             return res.status(403).json({message: "You are not authorized to carry out this action"})
         }
         await User.findByIdAndDelete(id)

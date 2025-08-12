@@ -7,7 +7,7 @@ export const viewUser = async (req, res) => {
         return res.status({message: "This user limits who can view their posts."})
     }
     try{
-        const user = await User.findById(id).select("-password -_id -updatedAt -createdAt -__v -isPrivate -isAdmin -isVerified -isActive")
+        const user = await User.findById(id).select("-lastOtpSentAt -password -_id -updatedAt -createdAt -__v -isPrivate -isAdmin -isVerified -isActive")
         res.status(200).json(user)
     }catch(error){
         res.status(500).json({message: error.message})
@@ -20,7 +20,7 @@ export const viewUsers = async (req,res) => {
         return res.status(400).json({message: 'You are not authorized to carry out this action'})
     }
     try{
-        const users = await User.find()
+        const users = await User.find().select('-id -password -isPrivate -isVerified -createdAt -updatedAt -__v -lastOtpSentAt -isAdmin')
         res.status(200).json(users)
     }catch(error){
         res.status(500).json({message: error.message})

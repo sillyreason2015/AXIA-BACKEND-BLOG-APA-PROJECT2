@@ -15,8 +15,8 @@ userRouter
 .post('/register',registerUser)
 .get('/user/:id', authMiddleware, viewUser)
 .get('/users', authMiddleware, viewUsers)
-.put('/update/:id', authMiddleware, updateUser)
-.delete('/delete/:id', authMiddleware, deleteUser)
+.put('/user/update/:id', authMiddleware, updateUser)
+.delete('/user/delete/:id', authMiddleware, deleteUser)
 
 
 export default userRouter

@@ -33,6 +33,9 @@ export const loginUser = async (req, res) => {
             return res.status(400).json({message: "Invalid login credentials"})
         }
        
+        user.isActive = true;
+        await user.save();
+
         await sendMail(mail)
         const token = genToken({userId: user._id})
         return res

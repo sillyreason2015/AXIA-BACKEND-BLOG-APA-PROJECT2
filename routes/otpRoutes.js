@@ -8,7 +8,7 @@ const otpRouter = router()
 
 
 otpRouter
-.post('/verify',authMiddleware, verifyOtp )
-.post('/resend', authMiddleware, resendOtp)
+.post('/verify',verifyOtp )
+.post('/resend',resendOtp)
 
 export default otpRouter
