@@ -11,8 +11,8 @@ const commentRouter = router()
 
 commentRouter
 .post('/create', authMiddleware, createComment)
-.get('/commnet', authMiddleware, viewComment)
-.get('/comments', authMiddleware, viewComments)
+.get('/', authMiddleware, viewComment)
+.get('/all', authMiddleware, viewComments)
 .put('/update', authMiddleware, updateComment)
 .delete('/delete', authMiddleware, deleteComment)
 
