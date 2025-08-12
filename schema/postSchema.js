@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
-
-const postSchema = new mongoose.Schema(
+const Schema = mongoose.Schema
+const postSchema = new Schema(
     {
         title: {
             type: String,
@@ -17,10 +17,10 @@ const postSchema = new mongoose.Schema(
             ref: "User",
             required: true
         },
-        tags: {
-            type: [String],
-            default: []
-        }
+         comments: [{ 
+            type: mongoose.Schema.Types.ObjectId, 
+            ref: 'Comment'
+         }]
     },
     { timestamps: true }
 );
