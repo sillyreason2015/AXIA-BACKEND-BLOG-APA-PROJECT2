@@ -11,10 +11,10 @@ const commentRouter = router()
 
 commentRouter
 .post('/create', authMiddleware, createComment)
-.get('/', authMiddleware, viewComment)
+.get('/:id', authMiddleware, viewComment)
 .get('/all', authMiddleware, viewComments)
-.put('/update', authMiddleware, updateComment)
-.delete('/delete', authMiddleware, deleteComment)
+.put('/update/:id', authMiddleware, updateComment)
+.delete('/delete/:id', authMiddleware, deleteComment)
 
 
 export default commentRouter

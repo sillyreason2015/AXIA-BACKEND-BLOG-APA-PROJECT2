@@ -11,9 +11,9 @@ const postRouter = router()
 
 postRouter
 .post('/create', authMiddleware, createPost)
-.get('/', authMiddleware, viewPost)
+.get('/:id', authMiddleware, viewPost)
 .get('/all', authMiddleware, viewPosts)
-.put('/', authMiddleware, updatePost)
-.delete('/delete', authMiddleware, deletePost)
+.put('/update/:id', authMiddleware, updatePost)
+.delete('/delete/:id', authMiddleware, deletePost)
 
 export default postRouter
