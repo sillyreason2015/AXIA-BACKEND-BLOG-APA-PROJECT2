@@ -10,9 +10,9 @@ import authMiddleware from '../middleware/authMiddleware.js'
 const commentRouter = router()
 
 commentRouter
-.post('/create', authMiddleware, createComment)
-.get('/:id', authMiddleware, viewComment)
 .get('/all', authMiddleware, viewComments)
+.post('/:id/post', authMiddleware, createComment)
+.get('/:id', authMiddleware, viewComment)
 .put('/update/:id', authMiddleware, updateComment)
 .delete('/delete/:id', authMiddleware, deleteComment)
 

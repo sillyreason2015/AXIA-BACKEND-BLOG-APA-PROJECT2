@@ -11,8 +11,8 @@ const postRouter = router()
 
 postRouter
 .post('/create', authMiddleware, createPost)
-.get('/:id', authMiddleware, viewPost)
 .get('/all', authMiddleware, viewPosts)
+.get('/:id', authMiddleware, viewPost)
 .put('/update/:id', authMiddleware, updatePost)
 .delete('/delete/:id', authMiddleware, deletePost)
 

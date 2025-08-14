@@ -12,7 +12,7 @@ export const deletePost = async (req,res) => {
         if(post.author.toString() !== _id.toString() && !isAdmin){
             return res.status(403).json({message: "You are not authorized to carry out this action"})
         }
-        await post.findByIdAndDelete(id)
+        await Post.findByIdAndDelete(id)
         res.status(200).json({message: "Post deleted Successfully"})
     }catch(error){
         res.status(500).json({message: error.message})

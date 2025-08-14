@@ -12,7 +12,11 @@ export const updatePost = async (req,res) => {
         if(post.author.toString() !== _id.toString() && !isAdmin){
             return res.status(403).json({message: "You are not authorized to carry out this action"})
         }
-        await post.findByIdAndUpdate(id)
+        await Post.findByIdAndUpdate(
+            id,
+            { ...req.body },
+            { new: true, runValidators: true }
+        ).select('-_id -author._id ')
         res.status(200).json({message: "Post updated Successfully"})
     }catch(error){
         res.status(500).json({message: error.message})

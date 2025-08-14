@@ -6,9 +6,9 @@ import { sendMail } from "../../utils/sendMail.js";
 export const createComment = async (req, res) => {
     const {content} = req.body
     const {id} = req.params
-    const {_id} = req.user
+    const {_id, username} = req.user
 
-    const post = await Post.findById(id)
+    const post = await Post.findById(id).populate('author', 'username email')
 
     if(!content){
         return res.status(400).json({message: "Field cannot be empty"})
@@ -27,14 +27,17 @@ export const createComment = async (req, res) => {
     post.comments.push(newComment._id)
     await post.save()
 
-    const mailObj= {
-      from: process.env.EMAIL_USER,
-      to: post.author.email,
+    if (!post.author || !post.author.email) {
+    console.log("Author info missing for email");
+} else {
+    const mailObj = {
+      mailFrom: process.env.EMAIL_USER,
+      mailTo: post.author.email,
       subject: `New comment on your post by ${req.user.username}`,
-      text: `Hi ${post.author.username},\n\nYour post titled "${post.title}" just received a new comment.\n\nComment content:\n"${content}"\n\nBest,\nYour Blog Team`,
-    }
-
-    await sendMail(mailObj)
+      body: `Hi ${post.author.username},\n\nYour post titled "${post.title}" just received a new comment.\n\nComment content:\n"${content}"\n\nBest,\nYour Blog Team`,
+    };
+    await sendMail(mailObj);
+}
 
     res.status(200).json({message: "Comment created Sucessfully"})
   }catch(error){

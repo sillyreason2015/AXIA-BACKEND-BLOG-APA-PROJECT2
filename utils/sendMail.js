@@ -19,6 +19,7 @@ export const sendMail = async ({ mailFrom, mailTo, subject, body }) => {
         })
         console.log('Email Sent:', info.messageId)
     }catch(error){
-        res.status(500).json("Email sending failed:", error.message)
+        console.error("Email sending failed:", error.message);
+        throw new Error("Email sending failed")
     }
 }
