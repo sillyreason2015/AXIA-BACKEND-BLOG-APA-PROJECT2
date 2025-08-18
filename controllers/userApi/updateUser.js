@@ -3,9 +3,9 @@ import bcrypt from 'bcryptjs';
 
 export const updateUser = async (req, res) => {
     const { id } = req.params;
-    const { _id } = req.user;
+    const { _id, isAdmin} = req.user;
 
-    if (_id.toString() !== id) {
+    if (_id.toString() !== id || !isAdmin) {
         return res.status(403).json({ message: "You are not authorized to carry out this action" });
     }
 
