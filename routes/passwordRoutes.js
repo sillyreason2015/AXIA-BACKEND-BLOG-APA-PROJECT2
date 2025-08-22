@@ -8,7 +8,9 @@ const passwordRouter = router()
 
 
 passwordRouter
+//Route to request a password reset link
 .post('/request', authMiddleware, requestPassword)
+// Route to reset password using the token
 .post('/reset', authMiddleware, resetPassword)
 
 export default passwordRouter

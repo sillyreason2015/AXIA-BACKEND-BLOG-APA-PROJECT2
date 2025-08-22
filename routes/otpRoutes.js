@@ -8,7 +8,9 @@ const otpRouter = router()
 
 
 otpRouter
+// Route to verify OTP
 .post('/verify',verifyOtp )
+// Route to resend OTP
 .post('/resend',resendOtp)
 
 export default otpRouter

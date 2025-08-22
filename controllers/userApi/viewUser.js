@@ -1,6 +1,6 @@
 import User from "../../schema/userSchema.js"
 
-
+//  View all users (admin only)
 export const viewUsers = async (req, res) => {
     try {
         if (!req.user?.isAdmin) {
@@ -23,7 +23,7 @@ export const viewUsers = async (req, res) => {
 }
 
 
-
+// View a single user (self or admin)
 export const viewUser = async (req, res) => {
     try {
         const { id } = req.params

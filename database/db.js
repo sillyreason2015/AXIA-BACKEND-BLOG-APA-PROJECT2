@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 
-
+//databasee connection logic
 const connectDb = async () => {
     try{
         await mongoose.connect(process.env.MONGODB_URL, {

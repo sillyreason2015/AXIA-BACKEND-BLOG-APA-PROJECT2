@@ -1,11 +1,12 @@
 import User from '../../schema/userSchema.js';
 import bcrypt from 'bcryptjs';
 
+//update user function
 export const updateUser = async (req, res) => {
     const { id } = req.params;
     const { _id, isAdmin} = req.user;
-
-    if (_id.toString() !== id || !isAdmin) {
+    //make sure the user making the request is the real user or an admin
+    if (_id.toString() !== id && !isAdmin) {
         return res.status(403).json({ message: "You are not authorized to carry out this action" });
     }
 
@@ -13,12 +14,12 @@ export const updateUser = async (req, res) => {
         const update = { 
             ...req.body 
         };
-
+         //  Hash password if updated
         if (update.password) {
             const salt = await bcrypt.genSalt(10);
             update.password = await bcrypt.hash(update.password, salt);
         }
-
+        //  Update user
         const user = await User.findByIdAndUpdate(
             id,
             update,

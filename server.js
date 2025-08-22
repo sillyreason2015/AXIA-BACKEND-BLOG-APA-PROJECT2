@@ -18,7 +18,7 @@ const app = express()
 dotenv.config()
 const port = process.env.PORT
 
-
+//connect database function
 connectDb()
 
 app.use(express.json())
@@ -26,6 +26,7 @@ app.use(express.urlencoded({extended: true}))
 app.use(cookieParser())
 app.use(cors())
 
+// API routes
 app.use('/api', userRouter)
 app.use('/api/auth', authRouter)
 app.use('/api/password', passwordRouter)
@@ -33,7 +34,7 @@ app.use('/api/otp', otpRouter)
 app.use('/api/comment', commentRouter)
 app.use('/api/post', postRouter)
 
-
+// Start server
 app.listen(port, ()=>{
     console.log(`Our server is up and running on ${port}`)
 })

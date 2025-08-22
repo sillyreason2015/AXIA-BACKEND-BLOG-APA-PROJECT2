@@ -2,6 +2,7 @@ import nodemailer from 'nodemailer'
 
 export const sendMail = async ({ mailFrom, mailTo, subject, body }) => {
     try{
+          // Create a transporter object using SMTP transport
         const transporter = nodemailer.createTransport({
             host: process.env.EMAIL_HOST,
             port: process.env.EMAIL_PORT,
@@ -11,6 +12,7 @@ export const sendMail = async ({ mailFrom, mailTo, subject, body }) => {
                 pass: process.env.EMAIL_PASS,
             },
         })
+          // Send the email
         const info = await transporter.sendMail({
             from: mailFrom,
             to: mailTo,

@@ -5,6 +5,7 @@ import { sendMail } from "../../utils/sendMail.js";
 
 dotenv.config()
 
+//register user function
 export const registerUser = async(req, res)=>{
     const {username, displayName, password, email } = req.body
 
@@ -12,17 +13,20 @@ export const registerUser = async(req, res)=>{
         return res.status(400).json({message: "Please enter all fields"})
     }
     try{
-        const user = await User.findOne({email}, {username})
+        //chec if the user already exists
+        const user = await User.findOne({email})
         if(user){
            return res.status(400).json({message: "This User already exists"})
         }
+         //Generate OTP (5 or 6 digit random code)
         const otp = Math.floor(100000 +Math.random() * 90000)
         const otpExpires = new Date(Date.now() + 1000 * 60 * 5).toISOString()
         
-
+        //Hash password with bcrypt
         const salt = await bcrypt.genSalt(10)
         const hashedPassword = await bcrypt.hash(password, salt)
 
+         //  Create new user document
         const newUser = new User({
             ...req.body, 
             password: hashedPassword, 
@@ -32,6 +36,7 @@ export const registerUser = async(req, res)=>{
 
         await newUser.save()
 
+        //Send verification email
         const mailObj = {
             mailFrom: process.env.EMAIL_USER,
             mailTo: email,
